@@ -1,0 +1,121 @@
+// Vitest Snapshot v1
+
+exports[`mount component 1`] = `
+"<div>
+  <table class=\\"my_simple_table\\" cellspacing=\\"0\\">
+    <colgroup style=\\"width: 280px;\\"></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <thead>
+      <tr>
+        <th class=\\"table_head\\">名称<div class=\\"sort_span\\">无序</div>
+        </th>
+        <th class=\\"table_head\\">单价<div class=\\"sort_span\\" style=\\"display: none;\\">无序</div>
+        </th>
+        <th class=\\"table_head\\">数量<div class=\\"sort_span\\">无序</div>
+        </th>
+        <th class=\\"table_head\\">总价<div class=\\"sort_span\\">无序</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>测试数据1</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>123</td>
+      </tr>
+      <tr>
+        <td>测试数据22</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>13</td>
+      </tr>
+      <tr>
+        <td>测试数据33</td>
+        <td>12.3</td>
+        <td>11</td>
+        <td>123</td>
+      </tr>
+      <tr>
+        <td>测试数33</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>123</td>
+      </tr>
+      <tr>
+        <td>测试数据13</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>3</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class=\\"table_pagination\\"><span class=\\"page_span\\">上一页</span><span class=\\"page_span page_span_active\\">1</span><span class=\\"page_span\\">下一页</span><select>
+      <option value=\\"5\\">5</option>
+      <option value=\\"10\\">10</option>
+      <option value=\\"20\\">20</option>
+    </select><input><button>跳转</button></div>
+</div>"
+`;
+
+exports[`sort component 1`] = `
+"<div>
+  <table class=\\"my_simple_table\\" cellspacing=\\"0\\">
+    <colgroup style=\\"width: 280px;\\"></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <colgroup></colgroup>
+    <thead>
+      <tr>
+        <th class=\\"table_head\\">名称<div class=\\"sort_span\\">升序</div>
+        </th>
+        <th class=\\"table_head\\">单价<div class=\\"sort_span\\" style=\\"display: none;\\">无序</div>
+        </th>
+        <th class=\\"table_head\\">数量<div class=\\"sort_span\\">无序</div>
+        </th>
+        <th class=\\"table_head\\">总价<div class=\\"sort_span\\">无序</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>测试数33</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>123</td>
+      </tr>
+      <tr>
+        <td>测试数据1</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>123</td>
+      </tr>
+      <tr>
+        <td>测试数据13</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>测试数据22</td>
+        <td>12.3</td>
+        <td>10</td>
+        <td>13</td>
+      </tr>
+      <tr>
+        <td>测试数据33</td>
+        <td>12.3</td>
+        <td>11</td>
+        <td>123</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class=\\"table_pagination\\"><span class=\\"page_span\\">上一页</span><span class=\\"page_span page_span_active\\">1</span><span class=\\"page_span\\">下一页</span><select>
+      <option value=\\"5\\">5</option>
+      <option value=\\"10\\">10</option>
+      <option value=\\"20\\">20</option>
+    </select><input><button>跳转</button></div>
+</div>"
+`;
