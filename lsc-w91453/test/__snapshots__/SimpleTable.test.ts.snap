@@ -1,0 +1,46 @@
+// Vitest Snapshot v1
+
+exports[`mount component 1`] = `
+"<div>
+  <table border=\\"1\\">
+    <thead>
+      <tr>
+        <th style=\\"width: 200px;\\"><span>ID</span><span>无序</span></th>
+        <th style=\\"width: 200px;\\"><span>名称</span><span>无序</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>姓名</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>姓名</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>姓名3</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>姓名</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>姓名</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>姓名</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <ul style=\\"display: flex; list-style: none;\\">
+      <li style=\\"margin: 0px 10px;\\">跳转至</li>
+      <li style=\\"margin: 0px 10px;\\"><input type=\\"text\\"></li>
+    </ul>
+  </div>
+</div>"
+`;
