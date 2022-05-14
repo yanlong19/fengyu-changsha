@@ -4,29 +4,29 @@
 import SimpleTable from "./components/SimpleTable";
 import { reactive } from "vue";
 const columns = [{
-  dataIndex:'name',
-  title:'名称',
-  width:280,
-  isSort:true,
-},{
-  dataIndex:'price',
-  title:'单价',
-},{
-  dataIndex:'num',
-  title:'数量',
-  isSort:true,
-},{
-  dataIndex:'count',
-  title:'总价',
-  isSort:true,
+  dataIndex: 'name',
+  title: '名称',
+  width: 280,
+  isSort: true,
+}, {
+  dataIndex: 'price',
+  title: '单价',
+}, {
+  dataIndex: 'num',
+  title: '数量',
+  isSort: true,
+}, {
+  dataIndex: 'count',
+  title: '总价',
+  isSort: true,
 }]
 const table = reactive({
-  data:[
-    {name: '测试数据1', price: 12.3, num: 10,count: 123},
-    {name: '测试数据22', price: 12.3, num: 10,count: 13},
-    {name: '测试数据33', price: 12.3, num: 11,count: 123},
-    {name: '测试数33', price: 12.3, num: 10,count: 123},
-    {name: '测试数据13', price: 12.3, num: 10,count: 3}
+  data: [
+    { name: '测试数据1', price: 12.3, num: 10, count: 123 },
+    { name: '测试数据22', price: 12.3, num: 10, count: 13 },
+    { name: '测试数据33', price: 12.3, num: 11, count: 123 },
+    { name: '测试数33', price: 12.3, num: 10, count: 123 },
+    { name: '测试数据13', price: 12.3, num: 10, count: 3 }
   ]
 })
 
@@ -34,14 +34,14 @@ const pagination = reactive({
   pageSize: 10,
   pageNo: 1,
   total: 100,
-  pageSizeOptions: [5,10,15,20,25],
-  pageChange:(pageSize: number, pageNo: number): void =>{
+  pageSizeOptions: [5, 10, 15, 20, 25],
+  pageChange: (pageSize: number, pageNo: number): void => {
     console.log(`pageSize:${pageSize}-----pageNo:${pageNo}`)
     pagination.pageSize = pageSize;
     pagination.pageNo = pageNo;
-    table.data = (new Array(pageSize).fill(null).map((_,index)=>{
-      const price = Math.floor(Math.random()*10000) / 100;
-      const num = Math.ceil(Math.random()*10)
+    table.data = (new Array(pageSize).fill(null).map((_, index) => {
+      const price = Math.floor(Math.random() * 10000) / 100;
+      const num = Math.ceil(Math.random() * 10)
       return {
         name: `测试数据${pageNo}_${index}`,
         price,
@@ -53,8 +53,8 @@ const pagination = reactive({
   }
 })
 
-const filter = (item: any, num: number, arr: any[])=>{
-  if(item.num < 5){
+const filter = (item: any, num: number, arr: any[]) => {
+  if (item.num < 5) {
     return false
   }
   return true

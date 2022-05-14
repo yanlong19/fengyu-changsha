@@ -1,4 +1,4 @@
-import { PropType,ExtractPropTypes } from "vue";
+import { PropType, ExtractPropTypes } from "vue";
 interface ColumnsItem {
   dataIndex: string,
   title: string,
@@ -6,16 +6,22 @@ interface ColumnsItem {
   isSort?: boolean
 }
 
-interface Pagination{
+interface Pagination {
   pageSize: number,
   pageNo: number,
   total: number,
   pageSizeOptions?: number[],
-  pageChange?(pageSize:number,pageNo:number): void
+  pageChange?(pageSize: number, pageNo: number): void
 }
 
-interface ArrayFilterCallBack{
-  (value: any, index: number, array: any[]): any;
+export interface Sort {
+  sortIndex: string,
+  sortType: 'ASC' | 'DESC' | ''
+}
+
+
+interface ArrayFilterCallBack {
+  (value?: any, index?: number, array?: any[]): any;
 }
 
 //  定义 Props
@@ -24,19 +30,19 @@ export const tableProps = {
     type: Array as PropType<ColumnsItem[]>,
     require: true,
   },
-  dataSource:{
+  dataSource: {
     type: Array,
     default: () => []
   },
-  rowKey:{
+  rowKey: {
     type: String,
     require: false
   },
-  pagination:{
+  pagination: {
     type: Object as PropType<Pagination>,
     require: false
   },
-  filter:{
+  filter: {
     type: Function as PropType<ArrayFilterCallBack>,
     Request: false
   }

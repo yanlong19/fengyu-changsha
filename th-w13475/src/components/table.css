@@ -1,18 +1,23 @@
-.my_simple_table{
+.my_simple_table {
     border: 1px solid gray;
     width: 100%;
 }
-.my_simple_table td,th{
+
+.my_simple_table td,
+th {
     border-right: 1px solid gray;
 }
-.my_simple_table td:last-child,th:last-child{
+
+.my_simple_table td:last-child,
+th:last-child {
     border-right: 0px;
 }
 
-.my_simple_table .table_head{
+.my_simple_table .table_head {
     position: relative;
 }
-.my_simple_table .table_head .sort_span{
+
+.my_simple_table .table_head .sort_span {
     width: 50px;
     position: absolute;
     right: 10px;
@@ -20,20 +25,24 @@
     color: blue;
     cursor: pointer;
 }
-.table_pagination{
+
+.table_pagination {
     margin: 20px 0px;
     text-align: center;
     user-select: none;
 }
-.table_pagination .page_span{
+
+.table_pagination .page_span {
     color: blue;
     margin: 0px 10px;
     cursor: pointer;
 }
-.table_pagination .page_span.page_span_active{
+
+.table_pagination .page_span.page_span_active {
     color: red;
 }
-.table_pagination input{
+
+.table_pagination input {
     width: 50px;
     margin: 0px 20px;
 }
