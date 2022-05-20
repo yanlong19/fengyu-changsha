@@ -3,6 +3,9 @@ const formatWidth = (width: string | number): string => {
     if ((/^[0-9]+px&/i).test(widthStr)) {
         return widthStr;
     }
+    if ((/^[0-9]+%&/i).test(widthStr)) {
+        return widthStr;
+    }
     if (Number.isNaN(Number(widthStr))) {
         return '';
     }
