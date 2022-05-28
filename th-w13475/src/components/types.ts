@@ -35,8 +35,8 @@ export interface UsePaginationReturn {
   setInputNum: InputChangeFn
 }
 export const pagination = {
-  defaultPageNo: Number,
-  defaultPageSize: Number,
+  pageNo: Number,
+  pageSize: Number,
   total: {
     type: Number,
     default: 0
@@ -72,8 +72,8 @@ export interface ColumnsItem {
 }
 // 表格分页数据类型定义
 export interface Pagination {
-  defaultPageNo?: number,
-  defaultPageSize?: number,
+  pageNo?: number,
+  pageSize?: number,
   total: number,
   pageSizeOptions?: number[],
   pageChange?: PageChange

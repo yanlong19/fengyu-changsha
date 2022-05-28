@@ -9,9 +9,11 @@ const tableConfig = reactive<{ data: any[], columns: ColumnsItem[], pagination: 
   data: [],
   columns: [],
   pagination: {
+    pageNo: 1,
+    pageSize: 20,
     total: 100,
     pageSizeOptions: [5, 10, 15, 20, 25]
-  }
+  },
 })
 tableConfig.data = [
   { name: '测试数据1', price: 12.3, num: 10, count: 123, test: '111' },
@@ -41,6 +43,8 @@ tableConfig.columns = [{
 
 const { data, columns, pagination } = toRefs(tableConfig)
 pagination.value.pageChange = (pageSize: number, pageNo: number): void => {
+  tableConfig.pagination.pageNo = pageNo;
+  tableConfig.pagination.pageSize = pageSize;
   tableConfig.data = new Array(pageSize).fill(null).map((item, index) => ({
     name: `测试数据_${pageNo}_${index}`, price: parseInt(Math.random() * 10000 + '', 10) / 100, num: 10, count: 123, test: '111',
   }))
@@ -70,9 +74,6 @@ const paginationAdd = () => {
   pagination.value.pageSizeOptions?.push(pagination.value.pageSizeOptions[pagination.value.pageSizeOptions.length - 1] + 10)
 }
 const tableRef = ref<TableInst | null>(null)
-const gotoPage = () => {
-  tableRef.value?.pageRef.setPageNo(3)
-}
 const sortChange = (sortIndex: string, sortType: number): void => {
   tableConfig.data = new Array(5).fill(null).map((item, index) => ({
     name: `排序测试_${sortIndex}_${sortType}_${index}`, price: parseInt(Math.random() * 10000 + '', 10) / 100, num: 10, count: 123, test: '111',
@@ -88,10 +89,9 @@ const sortChange = (sortIndex: string, sortType: number): void => {
       <button @click="totalAdd">total减50</button>
       <button @click="totalsubtract">total加50</button>
       <button @click="paginationAdd">pageSizeOptions加个选项</button>
-      <button @click="gotoPage">外部控制调转到第三页</button>
     </div>
     <SimpleTable @sortChange="sortChange" :isDefaultSort="false" :columns="columns" :dataSource="data"
-      :pagination="pagination" :filter="filter" ref="tableRef" />
+      :pagination="pagination" :filter="filter" ref="tableRef" width="800px" />
 
   </div>
 </template>

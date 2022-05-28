@@ -1,4 +1,4 @@
-import { defineComponent, toRefs, unref } from "vue";
+import { defineComponent, toRefs, unref, Ref } from "vue";
 import { type PaginationProps, pagination } from "./types";
 import usePagination from '../hooks/usePagination';
 import './table.css'
@@ -7,7 +7,7 @@ export default defineComponent({
     props: pagination,
     setup(props: PaginationProps, { attrs, emit, slots }) {
 
-        const { total, pageSizeOptions, pageChange, defaultPageNo, defaultPageSize } = toRefs(props);
+        const { total, pageSizeOptions, pageChange, pageNo: propsPageNo, pageSize: propsPageSize } = toRefs(props);
         const {
             pageNo,
             pageSize,
@@ -20,7 +20,7 @@ export default defineComponent({
             setPageNo,
             setPageSize,
             setInputNum
-        } = usePagination(pageSizeOptions, total, unref(pageChange), unref(defaultPageNo), unref(defaultPageSize));
+        } = usePagination(pageSizeOptions, total, unref(pageChange), propsPageNo, propsPageSize);
         return () => (
             <div class="table_pagination">
                 <span class="page_span" onClick={Prev}>上一页</span>
@@ -30,7 +30,7 @@ export default defineComponent({
                     </span>
                 ))}
                 <span class="page_span" onClick={next}>下一页</span>
-                <select onChange={pageSizeChange}>
+                <select onChange={pageSizeChange} value={pageSize.value}>
                     {pageSizeOptions?.value?.map(item => (
                         <option value={item}>{item}</option>
                     ))}
