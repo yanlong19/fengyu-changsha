@@ -10,11 +10,9 @@ import { compare } from '../utils/tableUtils';
 */
 export default function (beforeSortData: Ref<any[]>, isDefaultSort: Ref<boolean>, emit: EmitType): UseSortReturn {
   // 定义排序数据
-  const { sortObj }: { sortObj: Sort } = reactive({
-    sortObj: {
-      sortIndex: '',
-      sortType: ''
-    }
+  const sortObj: Sort = reactive({
+    sortIndex: '',
+    sortType: ''
   })
 
   // 排序点击处理
@@ -38,9 +36,10 @@ export default function (beforeSortData: Ref<any[]>, isDefaultSort: Ref<boolean>
 
   // 计算排序后的展示数据
   const showData = computed(() => {
-    const copyData: [] = JSON.parse(JSON.stringify(unref(beforeSortData)));
+    let copyData = unref(beforeSortData);
     // 判断是否使用组件默认的排序逻辑
     if (unref(isDefaultSort) && sortObj.sortType) {
+      copyData = JSON.parse(JSON.stringify(unref(beforeSortData)));
       copyData.sort((a, b) => compare(a[sortObj.sortIndex], b[sortObj.sortIndex], sortObj.sortType))
     }
     return copyData

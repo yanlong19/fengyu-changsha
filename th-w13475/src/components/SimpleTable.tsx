@@ -13,14 +13,16 @@ export default defineComponent({
 
     // 通过计算属性拿到对应的展示数据
     const beforeSortData = computed(() => {
-      let data: never[]
+      let data: any[];
       // 用来记录传入的表格数据的深拷贝附件
       try {
-        data = JSON.parse(JSON.stringify(dataSource.value));
-        // 添加主键字段
-        data.forEach((row: any, index: number) => {
-          row.__id = rowKey?.value ? row[rowKey.value] : index
-        });
+        // 添加主键字段,顺便拷贝一份数据出来,暂时不考虑超过二层引用类型导致的浅拷贝问题
+        data = dataSource.value.map((row: any, index: number) => (
+          {
+            __id: rowKey?.value ? row[rowKey.value] : index,
+            ...row
+          }
+        ));
       } catch (error: any) {
         data = [];
         console.log('数据源格式错误,请确保是一个JSON格式的数组', error.message)

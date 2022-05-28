@@ -91,7 +91,7 @@ const sortChange = (sortIndex: string, sortType: number): void => {
       <button @click="paginationAdd">pageSizeOptions加个选项</button>
     </div>
     <SimpleTable @sortChange="sortChange" :isDefaultSort="false" :columns="columns" :dataSource="data"
-      :pagination="pagination" :filter="filter" ref="tableRef" width="800px" />
+      :pagination="pagination" :filter="filter" ref="tableRef" />
 
   </div>
 </template>
