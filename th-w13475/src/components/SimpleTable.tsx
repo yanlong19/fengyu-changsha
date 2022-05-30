@@ -34,7 +34,7 @@ export default defineComponent({
       }
       return data;
     })
-    const { sort, showData, getSortText, sortObj } = useSort(beforeSortData, isDefaultSort, emit)
+    const { sort, showData, getSortText } = useSort(beforeSortData, isDefaultSort, emit)
     const tableWidth = computed(() => {
       return formatWidth(width?.value || '') || '100%'
     })

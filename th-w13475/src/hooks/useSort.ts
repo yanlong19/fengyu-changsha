@@ -59,7 +59,6 @@ export default function (beforeSortData: Ref<any[]>, isDefaultSort: Ref<boolean>
   }
 
   return {
-    sortObj,
     sort,
     showData,
     getSortText

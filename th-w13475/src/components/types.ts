@@ -7,7 +7,6 @@ export interface Sort {
 }
 // 排序hook返回参数类型定义
 export interface UseSortReturn {
-  sortObj: Sort,
   sort: (key: string) => void,
   showData: ComputedRef<any[]>,
   getSortText: (key: string) => void
@@ -30,8 +29,6 @@ export interface UsePaginationReturn {
   next: () => void,
   goTo: SetPageFn,
   pageSizeChange: InputChangeFn,
-  setPageNo: SetPageFn,
-  setPageSize: SetPageFn,
   setInputNum: InputChangeFn
 }
 export const pagination = {

@@ -17,8 +17,6 @@ export default defineComponent({
             next,
             goTo,
             pageSizeChange,
-            setPageNo,
-            setPageSize,
             setInputNum
         } = usePagination(pageSizeOptions, total, unref(pageChange), propsPageNo, propsPageSize);
         return () => (

@@ -30,9 +30,9 @@ const pagination = {
   total: 100,
   pageSizeOptions: [5, 10, 15, 20, 25]
 }
-const getTestData = (sortIndex?: string, sortType?: string) => {
-  const data = new Array(5).fill(null).map((item, index) => ({
-    name: `排序测试_${sortIndex || ''}_${sortType || ''}_${index}`, price: parseInt(Math.random() * 10000 + '', 10) / 100, num: 10, count: 123,
+const getTestData = (pageSize: number, pageNo: number) => {
+  const data = new Array(pageSize).fill(null).map((item, index) => ({
+    name: `排序测试_${pageSize || ''}_${pageNo || ''}_${index}`, price: parseInt(Math.random() * 10000 + '', 10) / 100, num: 10, count: 123,
   }))
   return data;
 }
@@ -62,6 +62,10 @@ describe('base', () => {
     expect(wrapper.find('.my_simple_table').element.style.width).toBe('700px');
     await wrapper.setProps({ width: '800px' })
     expect(wrapper.find('.my_simple_table').element.style.width).toBe('800px');
+    await wrapper.setProps({ width: '90%' })
+    expect(wrapper.find('.my_simple_table').element.style.width).toBe('90%');
+    await wrapper.setProps({ width: 'ss' })
+    expect(wrapper.find('.my_simple_table').element.style.width).toBe('100%');
   });
   // 过滤功能测试
   test("filter component", async () => {
@@ -168,6 +172,111 @@ describe("pagination", () => {
     // 跳转到第四页,
     await pageButs[4].trigger('click');
     expect(PaginationInst.find('.page_span_active').element.textContent).toBe('4');
+    await PaginationInst.find('input').setValue('3');
+    await PaginationInst.find('button').trigger('click');
+    expect(PaginationInst.find('.page_span_active').element.textContent).toBe('3');
+    await PaginationInst.find('input').setValue('-3');
+    await PaginationInst.find('button').trigger('click');
+    expect(PaginationInst.find('.page_span_active').element.textContent).toBe('1');
+    await PaginationInst.find('input').setValue('99999');
+    await PaginationInst.find('button').trigger('click');
+    expect(PaginationInst.find('.page_span_active').element.textContent).toBe('20');
+  })
+  // 分页不受控情况的大小改变
+  test("base change", async () => {
+    const wrapper = mount(SimpleTable, {
+      props: {
+        columns,
+        dataSource: data,
+        pagination:{
+          ...pagination,
+          pageChange:(pageSize: number, pageNo: number)=>{
+            expect(pageSize).toBe(20);
+            wrapper.setProps({
+              dataSource: getTestData(pageSize, pageNo)
+            })
+          }
+        }
+      },
+    });
+    const PaginationInst = wrapper.findComponent(Pagination);
+    const pageSizeSelect = PaginationInst.find('select');
+    await pageSizeSelect.findAll('option')[3].setSelected();
+    expect(pageSizeSelect.element.value).toBe('20')
+    expect(wrapper.find('tbody').findAll('tr').length).toBe(20)
+  })
+
+  // 分页数据受控情况下的跳转
+  test("base change", async () => {
+    const pageChange = async (pageSize: number, pageNo: number)=>{
+      expect(pageSize).toBe(10);
+      expect(pageNo).toBe(2);
+      await wrapper.setProps({
+        dataSource: getTestData(pageSize, pageNo),
+        pagination:{
+          ...pagination,
+          pageChange,
+          pageSize,
+          pageNo
+        }
+      })
+    }
+    const wrapper = mount(SimpleTable, {
+      props: {
+        columns,
+        dataSource: data,
+        pagination:{
+          ...pagination,
+          pageChange,
+          pageSize:10,
+          pageNo:1
+        }
+      },
+    });
+    const PaginationInst = wrapper.findComponent(Pagination);
+    const pageSizeSelect = PaginationInst.find('select');
+    expect(pageSizeSelect.element.value).toBe('10')
+    expect(PaginationInst.find('.page_span_active').element.textContent).toBe('1')
+    const pageButs = PaginationInst.findAll('.page_span');
+    expect(pageButs[pageButs.length-1].element.textContent).toBe('下一页')
+    await pageButs[pageButs.length-1].trigger('click');
+    expect(PaginationInst.find('.page_span_active').element.textContent).toBe('2')
+  })
+  // 分页数据受控情况下的跳转,点击非上一页,下一页的跳转
+  test("base change", async () => {
+    const pageChange = async (pageSize: number, pageNo: number)=>{
+      expect(pageSize).toBe(10);
+      expect(pageNo).toBe(3);
+      await wrapper.setProps({
+        dataSource: getTestData(pageSize, pageNo),
+        pagination:{
+          ...pagination,
+          pageChange,
+          pageSize,
+          pageNo
+        }
+      })
+    }
+    const wrapper = mount(SimpleTable, {
+      props: {
+        columns,
+        dataSource: data,
+        pagination:{
+          ...pagination,
+          pageChange,
+          pageSize:10,
+          pageNo:1
+        }
+      },
+    });
+    const PaginationInst = wrapper.findComponent(Pagination);
+    const pageSizeSelect = PaginationInst.find('select');
+    expect(pageSizeSelect.element.value).toBe('10')
+    expect(PaginationInst.find('.page_span_active').element.textContent).toBe('1')
+    const pageButs = PaginationInst.findAll('.page_span');
+    expect(pageButs[3].element.textContent).toBe('3')
+    await pageButs[3].trigger('click');
+    expect(PaginationInst.find('.page_span_active').element.textContent).toBe('3')
   })
 })
 

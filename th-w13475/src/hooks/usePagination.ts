@@ -56,14 +56,6 @@ export default function (
         }
         __pageNo.value = num;
     }
-    // 修改页码
-    const setPageNo: SetPageFn = num => {
-        __pageNo.value = num;
-    }
-    // 修改分页大小
-    const setPageSize: SetPageFn = num => {
-        __pageSize.value = num;
-    }
     // 更改分页大小
     const pageSizeChange: InputChangeFn = (e) => {
         __pageSize.value = Number((e.target as HTMLSelectElement).value || 10)
@@ -74,13 +66,8 @@ export default function (
     };
     // 检测内部的分页值变动
     watch(__pageNo, () => {
-        pageChange && pageChange(unref(pageSize), unref(__pageNo));
-        nextTick(() => {
-            // 页面重新渲染后如果,内置的分页数据不等于真实的分页数据(分页数据受控但pageChange中没有更改传入的分页数据),
-            // 那么将值重置回当前真实值
-            __pageNo.value !== pageNo.value && (__pageNo.value = pageNo.value);
-            __pageSize.value !== pageSize.value && (__pageSize.value = pageSize.value);
-        })
+        __pageNo !== pageNo && pageChange && pageChange(unref(pageSize), unref(__pageNo));
+        nextTick(syncPageData)
     });
     const syncPageData = () => {
         // 页面重新渲染后如果,内置的分页数据不等于真实的分页数据(分页数据受控但pageChange中没有更改传入的分页数据),
@@ -89,7 +76,7 @@ export default function (
         __pageSize.value !== pageSize.value && (__pageSize.value = pageSize.value);
     }
     watch(__pageSize, () => {
-        pageChange && pageChange(unref(__pageSize), unref(pageNo));
+        __pageSize !== pageSize && pageChange && pageChange(unref(__pageSize), unref(pageNo));
         nextTick(syncPageData)
     });
     return {
@@ -101,8 +88,6 @@ export default function (
         next,
         goTo,
         pageSizeChange,
-        setPageNo,
-        setPageSize,
         setInputNum
     }
 } 
